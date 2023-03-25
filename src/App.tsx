@@ -5,9 +5,26 @@ import { Task } from './components/Task'
 // STYLE
 import { Plus } from 'phosphor-react'
 
-// Primary: 500, 400
-// Secondary: 400, 300
+// TYPE
+type ITask = Readonly<{
+  id: number
+  checked: boolean
+  content: string
+}>
+
 export function App() {
+  const [tasks, setTasks] = useState<ITask[]>([
+    { id: 1, checked: true, content: 'Limpar a casa' },
+    { id: 2, checked: false, content: 'Formatar meu computador' },
+    { id: 3, checked: false, content: 'Estudar React' },
+    { id: 4, checked: false, content: 'Ir para a academia' },
+    {
+      id: 5,
+      checked: false,
+      content: 'Ir para a casa da Sue comer pastelzin top',
+    },
+  ])
+
   return (
     <div className='grid place-items-center gap-10'>
       <Header />
@@ -47,10 +64,10 @@ export function App() {
       </section>
 
       <main className='w-full text-neutral-900 dark:text-white'>
-        <div className='mx-auto max-w-4xl flex flex-col gap-4'>
+        <div className='mx-auto max-w-4xl flex flex-col gap-4 px-4'>
           <header className='flex justify-between py-2 border-b-2 border-neutral-200 dark:border-neutral-800'>
             <p className='font-bold text-primary-400 dark:text-secondary-200'>
-              Craeted tasks{' '}
+              Created tasks{' '}
               <span className='bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-2 py-1 rounded-xl'>
                 0
               </span>
@@ -58,13 +75,15 @@ export function App() {
             <p className='font-bold text-primary-700 dark:text-secondary-700'>
               Done{' '}
               <span className='bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-2 py-1 rounded-xl'>
-                0 de 0
+                0 of 0
               </span>
             </p>
           </header>
+
           <section className='grid gap-2 pb-8'>
-            <Task />
-            <Task />
+            {tasks.map(({ id, checked, content }) => (
+              <Task key={id} content={content} checked={checked} />
+            ))}
           </section>
         </div>
       </main>
