@@ -19,15 +19,15 @@ module.exports = {
           100: '#b7c3b7',
         },
         secondary: {
-          900: '#42475e',
-          800: '#535976',
-          700: '#646b8e',
-          600: '#858ebd',
-          500: '#a6b2ec',
-          400: '#b8c1f0', // dark theme
-          300: '#cad1f4', // dark theme
-          200: '#d3d9f6',
-          100: '#dbe0f7',
+          900: '#804a65',
+          800: '#995879',
+          700: '#b3678d',
+          600: '#cc76a2',
+          500: '#e684b6',
+          400: '#ff93ca', // dark theme
+          300: '#ffa9d5', // dark theme
+          200: '#ffbedf',
+          100: '#ffd4ea',
         },
         background: {
           900: '#121214',
