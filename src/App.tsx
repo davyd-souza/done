@@ -1,3 +1,6 @@
+// DEPENDENCY
+import { ChangeEvent, FormEvent, useState } from 'react'
+
 // COMPONENT
 import { Header } from './components/Header'
 import { Task } from './components/Task'
@@ -13,6 +16,7 @@ type ITask = Readonly<{
 }>
 
 export function App() {
+  const [taskText, setTaskText] = useState('')
   const [tasks, setTasks] = useState<ITask[]>([
     { id: 1, checked: true, content: 'Limpar a casa' },
     { id: 2, checked: false, content: 'Formatar meu computador' },
@@ -25,17 +29,32 @@ export function App() {
     },
   ])
 
+  const handleTaskTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTaskText(e.target.value as string)
+  }
+
+  const handleCreateNewTask = (e: FormEvent) => {
+    e.preventDefault()
+
+    setTasks((state) => [
+      ...state,
+      { id: state.length + 1, content: taskText, checked: false },
+    ])
+  }
+
   return (
     <div className='grid place-items-center gap-10'>
       <Header />
 
       <section className='w-full'>
-        <div className='mx-auto max-w-4xl'>
-          <form>
+        <div className='mx-auto max-w-4xl px-4'>
+          <form onSubmit={handleCreateNewTask}>
             <div className='flex'>
               <input
                 autoFocus
                 type='text'
+                value={taskText}
+                onChange={handleTaskTextChange}
                 className='
                   w-full bg-transparent p-2
                   text-neutral-800 dark:text-white
@@ -69,13 +88,13 @@ export function App() {
             <p className='font-bold text-primary-400 dark:text-secondary-200'>
               Created tasks{' '}
               <span className='bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-2 py-1 rounded-xl'>
-                0
+                {tasks.length}
               </span>
             </p>
             <p className='font-bold text-primary-700 dark:text-secondary-700'>
               Done{' '}
               <span className='bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-2 py-1 rounded-xl'>
-                0 of 0
+                0 of {tasks.length}
               </span>
             </p>
           </header>
