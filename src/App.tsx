@@ -3,10 +3,8 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 
 // COMPONENT
 import { Header } from './components/Header'
+import { NewTaskForm } from './components/NewTaskForm'
 import { Task } from './components/Task'
-
-// STYLE
-import { Plus } from 'phosphor-react'
 
 // TYPE
 export type ITask = Readonly<{
@@ -75,37 +73,11 @@ export function App() {
 
       <section className='w-full'>
         <div className='mx-auto max-w-4xl px-4'>
-          <form onSubmit={handleCreateNewTask}>
-            <div className='flex'>
-              <input
-                autoFocus
-                type='text'
-                value={taskText}
-                onChange={handleTaskTextChange}
-                className='
-                  w-full bg-transparent p-2
-                  text-neutral-800 dark:text-white
-                  border-y-2 border-l-2 border-primary-400 dark:border-secondary-200 rounded-tl-2xl rounded-bl-2xl
-                  focus-visible:outline-none focus:ring ring-primary-300 dark:ring-secondary-100
-                  focus:ring-offset-2 ring-offset-white dark:ring-offset-neutral-900
-                '
-              />
-              <button
-                title='Create task'
-                className='
-                  text-white dark:text-neutral-900 font-medium
-                  inline-flex gap-1 items-center py-2 px-4 transition-colors
-                  bg-primary-400 dark:bg-secondary-200
-                  border-y-2 border-r-2 border-primary-400 dark:border-secondary-200 rounded-tr-2xl rounded-br-2xl
-                  hover:bg-primary-300 hover:border-primary-300 dark:hover:bg-secondary-100 dark:hover:border-secondary-100
-                  focus-visible:outline-none focus:ring ring-primary-300 dark:ring-secondary-100
-                  focus:ring-offset-2 ring-offset-white dark:ring-offset-neutral-900
-                '
-              >
-                <Plus size={20} weight='bold' />
-              </button>
-            </div>
-          </form>
+          <NewTaskForm
+            taskText={taskText}
+            onTaskTextChange={handleTaskTextChange}
+            onCreateNewTask={handleCreateNewTask}
+          />
         </div>
       </section>
 
