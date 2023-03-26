@@ -44,6 +44,7 @@ export function App() {
       ...state,
       { id: crypto.randomUUID(), content: taskText, checked: false },
     ])
+    setTaskText('')
   }
 
   const handleToggleTask = (id: string) => {
