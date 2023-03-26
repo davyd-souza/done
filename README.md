@@ -3,7 +3,7 @@
   Nothing is more satisfying than completing a task!
 </p>
 <p align="center">
-	<img src="" alt="Application layout" />
+	<img src="https://user-images.githubusercontent.com/54182110/227749642-c6d829d2-d933-446b-a430-69ae149fcaa8.png" alt="Application layout" />
 </p>
 
 <p align="center">
