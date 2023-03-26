@@ -9,7 +9,7 @@ import { Task } from './components/Task'
 import { Plus } from 'phosphor-react'
 
 // TYPE
-type ITask = Readonly<{
+export type ITask = Readonly<{
   id: number
   checked: boolean
   content: string
@@ -18,15 +18,14 @@ type ITask = Readonly<{
 export function App() {
   const [taskText, setTaskText] = useState('')
   const [tasks, setTasks] = useState<ITask[]>([
-    { id: 1, checked: true, content: 'Limpar a casa' },
+    {
+      id: 1,
+      checked: true,
+      content: 'Limpar a casa',
+    },
     { id: 2, checked: false, content: 'Formatar meu computador' },
     { id: 3, checked: false, content: 'Estudar React' },
     { id: 4, checked: false, content: 'Ir para a academia' },
-    {
-      id: 5,
-      checked: false,
-      content: 'Ir para a casa da Sue comer pastelzin top',
-    },
   ])
 
   const handleTaskTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +39,17 @@ export function App() {
       ...state,
       { id: state.length + 1, content: taskText, checked: false },
     ])
+  }
+
+  const handleToggleTask = (id: number) => {
+    const newTaskCheckedList = tasks.map((task) => {
+      if (task.id === id) {
+        return { id, content: task.content, checked: !task.checked }
+      }
+      return task
+    })
+
+    setTasks(newTaskCheckedList)
   }
 
   return (
@@ -91,17 +101,24 @@ export function App() {
                 {tasks.length}
               </span>
             </p>
-            <p className='font-bold text-primary-700 dark:text-secondary-700'>
+            <p className='font-bold text-primary-500 dark:text-secondary-700'>
               Done{' '}
               <span className='bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-white px-2 py-1 rounded-xl'>
-                0 of {tasks.length}
+                {tasks.filter((task) => task.checked === true).length} of{' '}
+                {tasks.length}
               </span>
             </p>
           </header>
 
           <section className='grid gap-2 pb-8'>
             {tasks.map(({ id, checked, content }) => (
-              <Task key={id} content={content} checked={checked} />
+              <Task
+                key={id}
+                id={id}
+                content={content}
+                checked={checked}
+                onToggleTask={handleToggleTask}
+              />
             ))}
           </section>
         </div>
