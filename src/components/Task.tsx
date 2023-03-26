@@ -8,13 +8,20 @@ import * as Checkbox from '@radix-ui/react-checkbox'
 import { Check, Trash } from 'phosphor-react'
 
 interface TaskProps {
-  id: number
+  id: string
   content: string
   checked: boolean
-  onToggleTask: (id: number) => void
+  onToggleTask: (id: string) => void
+  onDeleteTask: (id: string) => void
 }
 
-export function Task({ id, content, checked, onToggleTask }: TaskProps) {
+export function Task({
+  id,
+  content,
+  checked,
+  onToggleTask,
+  onDeleteTask,
+}: TaskProps) {
   return (
     <article
       className={clsx(
@@ -57,6 +64,7 @@ export function Task({ id, content, checked, onToggleTask }: TaskProps) {
       <button
         className='leading-[0] hover:text-red-600 transition-colors'
         title='Delete task'
+        onClick={() => onDeleteTask(id)}
       >
         <Trash size={20} weight='bold' />
       </button>

@@ -10,7 +10,7 @@ import { Plus } from 'phosphor-react'
 
 // TYPE
 export type ITask = Readonly<{
-  id: number
+  id: string
   checked: boolean
   content: string
 }>
@@ -19,13 +19,25 @@ export function App() {
   const [taskText, setTaskText] = useState('')
   const [tasks, setTasks] = useState<ITask[]>([
     {
-      id: 1,
+      id: '9fb29b0d-c0f0-4f9f-84e4-f111f0ab3303',
       checked: true,
       content: 'Limpar a casa',
     },
-    { id: 2, checked: false, content: 'Formatar meu computador' },
-    { id: 3, checked: false, content: 'Estudar React' },
-    { id: 4, checked: false, content: 'Ir para a academia' },
+    {
+      id: '6e526cfe-b129-4fb8-a3de-3805c4aa5ee7',
+      checked: false,
+      content: 'Formatar meu computador',
+    },
+    {
+      id: '60688a1f-0359-43e7-a12d-5b65e285f2fc',
+      checked: false,
+      content: 'Estudar React',
+    },
+    {
+      id: '8923388e-0c9b-4cc9-8472-112cc9d387c7',
+      checked: false,
+      content: 'Ir para a academia',
+    },
   ])
 
   const handleTaskTextChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +49,11 @@ export function App() {
 
     setTasks((state) => [
       ...state,
-      { id: state.length + 1, content: taskText, checked: false },
+      { id: crypto.randomUUID(), content: taskText, checked: false },
     ])
   }
 
-  const handleToggleTask = (id: number) => {
+  const handleToggleTask = (id: string) => {
     const newTaskCheckedList = tasks.map((task) => {
       if (task.id === id) {
         return { id, content: task.content, checked: !task.checked }
@@ -50,6 +62,11 @@ export function App() {
     })
 
     setTasks(newTaskCheckedList)
+  }
+
+  const handleDeleteTask = (id: string) => {
+    const newTaskListWithoutDeleted = tasks.filter((task) => task.id !== id)
+    setTasks(newTaskListWithoutDeleted)
   }
 
   return (
@@ -118,6 +135,7 @@ export function App() {
                 content={content}
                 checked={checked}
                 onToggleTask={handleToggleTask}
+                onDeleteTask={handleDeleteTask}
               />
             ))}
           </section>
