@@ -19,22 +19,17 @@ export function App() {
     {
       id: '9fb29b0d-c0f0-4f9f-84e4-f111f0ab3303',
       checked: true,
-      content: 'Limpar a casa',
+      content: 'Clean the house',
     },
     {
       id: '6e526cfe-b129-4fb8-a3de-3805c4aa5ee7',
       checked: false,
-      content: 'Formatar meu computador',
+      content: 'Study React',
     },
     {
       id: '60688a1f-0359-43e7-a12d-5b65e285f2fc',
       checked: false,
-      content: 'Estudar React',
-    },
-    {
-      id: '8923388e-0c9b-4cc9-8472-112cc9d387c7',
-      checked: false,
-      content: 'Ir para a academia',
+      content: 'Go to the gym',
     },
   ])
 
